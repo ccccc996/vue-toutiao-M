@@ -3,9 +3,9 @@
     <!-- 标题 -->
     <van-nav-bar class="page-nav-bar" title="登录" />
     <!-- 表单 -->
-    <van-form @submit="onSubmit">
+    <van-form @submit="onSubmit" ref="loginForm">
       <van-field
-        name="用户名"
+        name="mobile"
         placeholder="请输入手机号"
         v-model="user.mobile"
         :rules="userFormRules.mobile"
@@ -15,7 +15,7 @@
         <i slot="left-icon" class="toutiao toutiao-shouji"></i>
       </van-field>
       <van-field
-        name="密码"
+        name="code"
         placeholder="请输入验证码"
         v-model="user.code"
         :rules="userFormRules.code"
@@ -24,12 +24,26 @@
       >
         <i slot="left-icon" class="toutiao toutiao-yanzhengma"></i>
         <template #button>
-          <van-button round size="small" type="default">发送验证码</van-button>
+          <van-count-down
+            :time="1000 * 5"
+            format="ss s"
+            v-if="isCountDownShow"
+            @finish="isCountDownShow = false"
+          />
+          <van-button
+            v-else
+            native-type="button"
+            round
+            size="small"
+            type="default"
+            @click="onSendSms"
+            >发送验证码</van-button
+          >
         </template>
       </van-field>
       <div class="login-btn-wrap">
         <van-button class="login-btn" block type="info" native-type="submit"
-          >提交</van-button
+          >登录</van-button
         >
       </div>
     </van-form>
@@ -45,8 +59,8 @@ export default {
   data() {
     return {
       user: {
-        mobile: '13911111111',
-        code: '246810'
+        mobile: '',
+        code: ''
       },
       userFormRules: {
         mobile: [
@@ -69,7 +83,8 @@ export default {
             message: '验证码格式错误'
           }
         ]
-      }
+      },
+      isCountDownShow: false // 是否展示倒计时
     }
   },
 
@@ -95,6 +110,15 @@ export default {
           this.$toast.fail('登录失败，请稍后重试')
         }
       }
+    },
+    async onSendSms() {
+      try {
+        await this.$refs.loginForm.validate('mobile')
+      } catch (err) {
+        return console.log('验证失败', err)
+      }
+
+      this.isCountDownShow = true
     }
   }
 }
