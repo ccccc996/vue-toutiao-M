@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { login } from '@/api/user'
+import { login, sendSms } from '@/api/user'
 
 export default {
   name: 'loginIndex',
@@ -113,12 +113,26 @@ export default {
     },
     async onSendSms() {
       try {
+        // 1. 校验手机号，'mobile' 对应的是 name 属性值
         await this.$refs.loginForm.validate('mobile')
       } catch (err) {
         return console.log('验证失败', err)
       }
 
+      // 2. 验证通过，显示倒计时
       this.isCountDownShow = true
+
+      // 3. 请求发送验证码
+      try {
+        await sendSms(this.user.mobile)
+        this.$toast('发送成功')
+      } catch (err) {
+        if (err.response.status === 429) {
+          this.$toast('发送太频繁了，请稍后重试')
+        } else {
+          this.$toast('发送失败，请稍后重试')
+        }
+      }
     }
   }
 }
