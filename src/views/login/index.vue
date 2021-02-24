@@ -126,7 +126,7 @@ export default {
       try {
         const { data } = await sendSms(this.user.mobile)
         console.log(data)
-        this.$store.commit('setUser', data.data)
+        this.$store.commit('setItem', data.data)
         this.$toast('发送成功')
       } catch (err) {
         if (err.response.status === 429) {
