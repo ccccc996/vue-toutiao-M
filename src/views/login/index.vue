@@ -3,11 +3,11 @@
     <!-- 标题 -->
     <van-nav-bar class="page-nav-bar" title="登录" />
     <!-- 表单 -->
-    <van-form>
-      <van-field name="用户名" placeholder="请输入手机号">
+    <van-form @submit="onSubmit">
+      <van-field name="用户名" placeholder="请输入手机号" v-model="user.mobile">
         <i slot="left-icon" class="toutiao toutiao-shouji"></i>
       </van-field>
-      <van-field type="password" name="密码" placeholder="请输入验证码">
+      <van-field name="密码" placeholder="请输入验证码" v-model="user.code">
         <i slot="left-icon" class="toutiao toutiao-yanzhengma"></i>
         <template #button>
           <van-button round size="small" type="default">发送验证码</van-button>
@@ -23,14 +23,32 @@
 </template>
 
 <script>
+import { login } from '@/api/user'
+
 export default {
-  name: 'login',
+  name: 'loginIndex',
 
   data() {
-    return {}
+    return {
+      user: {
+        mobile: '',
+        code: ''
+      }
+    }
   },
 
-  methods: {}
+  methods: {
+    async onSubmit() {
+      try {
+        const res = await login(this.user)
+        console.log(res, '登陆成功')
+      } catch (err) {
+        if (err.response.status === 400) {
+          console.log('登录失败', err)
+        }
+      }
+    }
+  }
 }
 </script>
 
