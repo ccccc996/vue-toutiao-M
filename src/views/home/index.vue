@@ -11,6 +11,14 @@
         >搜索</van-button
       >
     </van-nav-bar>
+
+    <!-- 频道列表 -->
+    <van-tabs class="channel-tabs" v-model="active" animated swipeable>
+      <van-tab title="标签 1">内容 1</van-tab>
+      <van-tab title="标签 2">内容 2</van-tab>
+      <van-tab title="标签 3">内容 3</van-tab>
+      <van-tab title="标签 4">内容 4</van-tab>
+    </van-tabs>
   </div>
 </template>
 
@@ -19,7 +27,9 @@ export default {
   name: 'HomeIndex',
 
   data() {
-    return {}
+    return {
+      active: 0
+    }
   },
 
   methods: {}
@@ -40,6 +50,35 @@ export default {
     font-size: 28px;
     .van-icon {
       font-size: 32px;
+    }
+  }
+
+  /deep/ .channel-tabs {
+    .van-tabs__wrap {
+      height: 82px;
+    }
+
+    .van-tab {
+      border-right: 1px solid #edeff3;
+      min-width: 200px;
+      height: 82px;
+      font-size: 30px;
+      color: #777;
+    }
+
+    .van-tab--active {
+      color: #333;
+    }
+
+    .van-tabs__nav {
+      padding-bottom: 0;
+    }
+
+    .van-tabs__line {
+      bottom: 8px;
+      width: 31px !important;
+      height: 6px;
+      background-color: #3296fa;
     }
   }
 }
