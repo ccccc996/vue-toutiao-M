@@ -3,7 +3,7 @@
 // 存
 export const setItem = (key, value) => {
   if (typeof value === 'object') {
-    value = JSON.stringify('value')
+    value = JSON.stringify(value)
   }
   localStorage.setItem(key, value)
 }

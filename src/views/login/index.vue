@@ -105,9 +105,12 @@ export default {
         duration: 0
       })
       try {
-        await login(user)
+        const { data } = await login(user)
         // console.log(res, '登陆成功')
+        this.$store.commit('setUser', data.data)
         this.$toast.success('登录成功')
+
+        this.$router.push(this.$route.query.redirect || '/')
       } catch (err) {
         if (err.response.status === 400) {
           // console.log('手机号或验证码错误', err)

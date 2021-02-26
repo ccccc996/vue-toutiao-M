@@ -1,25 +1,7 @@
 <template>
   <div class="my-container">
-    <!-- 未登录 -->
-    <div class="header not-login">
-      <div
-        class="login-btn"
-        @click="
-          $router.push({
-            name: 'login',
-            query: {
-              redirect: '/my'
-            }
-          })
-        "
-      >
-        <img class="mobile-img" src="~@/assets/mobile.png" alt="" />
-        <span class="text">登录 / 注册</span>
-      </div>
-    </div>
-
     <!-- 已登录 -->
-    <div class="header user-info">
+    <div v-if="user" class="header user-info">
       <div class="base-info">
         <div class="left">
           <van-image
@@ -54,6 +36,24 @@
       </div>
     </div>
 
+    <!-- 未登录 -->
+    <div v-else class="header not-login">
+      <div
+        class="login-btn"
+        @click="
+          $router.push({
+            name: 'login',
+            query: {
+              redirect: '/my'
+            }
+          })
+        "
+      >
+        <img class="mobile-img" src="~@/assets/mobile.png" alt="" />
+        <span class="text">登录 / 注册</span>
+      </div>
+    </div>
+
     <!-- 宫格导航 -->
     <van-grid :column-num="2" class="grid-nav" clickable>
       <van-grid-item class="grid-item">
@@ -69,16 +69,21 @@
     <!-- Cell 单元格 -->
     <van-cell title="消息通知" is-link />
     <van-cell class="mb-9" title="小智同学" is-link />
-    <van-cell class="logout-cell" clickable title="退出登录" />
+    <van-cell class="logout-cell" v-if="user" clickable title="退出登录" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'MyIndex',
 
   data() {
     return {}
+  },
+
+  computed: {
+    ...mapState(['user'])
   },
 
   methods: {}
