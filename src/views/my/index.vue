@@ -69,7 +69,13 @@
     <!-- Cell 单元格 -->
     <van-cell title="消息通知" is-link />
     <van-cell class="mb-9" title="小智同学" is-link />
-    <van-cell class="logout-cell" v-if="user" clickable title="退出登录" />
+    <van-cell
+      class="logout-cell"
+      v-if="user"
+      clickable
+      title="退出登录"
+      @click="onLogout"
+    />
   </div>
 </template>
 
@@ -86,7 +92,24 @@ export default {
     ...mapState(['user'])
   },
 
-  methods: {}
+  methods: {
+    onLogout() {
+      // 提示
+      this.$dialog
+        .confirm({
+          title: '确定退出吗？'
+        })
+        .then(() => {
+          // on confirm
+          // 确认
+          // 清除登录状态（容器中的 user 和本地的 user）
+          this.$store.commit('setUser', null)
+        })
+        .catch(() => {
+          // on cancel
+        })
+    }
+  }
 }
 </script>
 
