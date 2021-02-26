@@ -53,6 +53,23 @@
         </div>
       </div>
     </div>
+
+    <!-- 宫格导航 -->
+    <van-grid :column-num="2" class="grid-nav" clickable>
+      <van-grid-item class="grid-item">
+        <i slot="icon" class="toutiao toutiao-shoucang"></i>
+        <span slot="text" class="text">收藏</span>
+      </van-grid-item>
+      <van-grid-item class="grid-item">
+        <i slot="icon" class="toutiao toutiao-lishi"></i>
+        <span slot="text" class="text">历史</span>
+      </van-grid-item>
+    </van-grid>
+
+    <!-- Cell 单元格 -->
+    <van-cell title="消息通知" is-link />
+    <van-cell class="mb-9" title="小智同学" is-link />
+    <van-cell class="logout-cell" clickable title="退出登录" />
   </div>
 </template>
 
