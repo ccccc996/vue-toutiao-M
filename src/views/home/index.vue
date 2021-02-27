@@ -20,10 +20,12 @@
       swipeable
       swipe-threshold="3"
     >
-      <van-tab title="标签 1">内容 1</van-tab>
-      <van-tab title="标签 2">内容 2</van-tab>
-      <van-tab title="标签 3">内容 3</van-tab>
-      <van-tab title="标签 4">内容 4</van-tab>
+      <van-tab
+        :title="channel.name"
+        v-for="channel in channels"
+        :key="channel.id"
+        >{{ channel.name }} 的内容</van-tab
+      >
       <div slot="nav-right" class="placeholder"></div>
       <div slot="nav-right" class="hamburger-btn">
         <i class="toutiao toutiao-gengduo"></i>
@@ -33,16 +35,32 @@
 </template>
 
 <script>
+import { getUserChannels } from '@/api/user'
+
 export default {
   name: 'HomeIndex',
 
   data() {
     return {
-      active: 0
+      active: 0,
+      channels: []
     }
   },
 
-  methods: {}
+  created() {
+    this.loadChannels()
+  },
+
+  methods: {
+    async loadChannels() {
+      try {
+        const { data } = await getUserChannels()
+        this.channels = data.data.channels
+      } catch (err) {
+        this.$toast('获取用户频道失败')
+      }
+    }
+  }
 }
 </script>
 
