@@ -24,11 +24,10 @@
         :title="channel.name"
         v-for="channel in channels"
         :key="channel.id"
-        >
+      >
         <!-- 频道文章列表 -->
         <article-list :channel="channel"></article-list>
-        </van-tab
-      >
+      </van-tab>
       <div slot="nav-right" class="placeholder"></div>
       <div slot="nav-right" class="hamburger-btn">
         <i class="toutiao toutiao-gengduo"></i>
@@ -74,6 +73,8 @@ export default {
 
 <style lang="less" scoped>
 .home-container {
+  padding-bottom: 100px;
+
   /deep/ .van-nav-bar__title {
     max-width: unset;
   }
