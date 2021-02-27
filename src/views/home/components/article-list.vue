@@ -4,6 +4,8 @@
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
+      :error.sync="error"
+      error-text="请求失败，点击重新加载"
       @load="onLoad"
     >
       <van-cell
@@ -33,7 +35,8 @@ export default {
       list: [], // 存储列表数据的数组
       loading: false, // 控制加载中 loading 状态
       finished: false, // 控制数据加载结束的状态
-      timestamp: null
+      timestamp: null, // 请求下一页数据的时间戳
+      error: false // 是否加载失败
     }
   },
 
@@ -47,7 +50,10 @@ export default {
           timestamp: this.timestamp || Date.now(), // 时间戳，请求新的推荐数据传当前的时间戳，请求历史推荐传指定的时间戳
           with_top: 1 // 是否包含置顶，进入页面第一次请求时要包含置顶文章，1-包含置顶，0-不包含
         })
-        console.log(data)
+        // 模拟随机失败的状态
+        if (Math.random() > 0.5) {
+          JSON.parse('sdgjhgsdajhgds')
+        }
         // 2. 把请求结果数据放到 list 数组中
         const { results } = data.data
         this.list.push(...results)
@@ -62,7 +68,11 @@ export default {
           // 如果没有数据了，把 finished 设置为 true，之后不再触发加载更多
           this.finished = true
         }
-      } catch (err) {}
+      } catch (err) {
+        console.log(err)
+        this.loading = false // 关闭 loading 效果
+        this.error = true // 开启错误提示
+      }
     }
   }
 }
