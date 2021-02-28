@@ -30,9 +30,9 @@
     <van-grid class="recommend-grid" :gutter="10">
       <van-grid-item
         class="grid-item"
-        v-for="(value, index) in 8"
+        v-for="(channel, index) in recommendChannels"
         :key="index"
-        text="文字"
+        :text="channel.name"
         icon="plus"
       />
     </van-grid>
@@ -59,6 +59,30 @@ export default {
   data() {
     return {
       allChannels: [] // 所有频道
+    }
+  },
+
+  computed: {
+    /* recommendChannels() {
+      const channels = []
+      this.allChannels.forEach(channel => {
+        // find 找到符合条件的第一个就返回，后面就不再查找！
+        const ret = this.myChannels.find(
+          myChannel => myChannel.id === channel.id
+        )
+        // 我的频道没有找到 channel，则收集
+        if (!ret) {
+          channels.push(channel)
+        }
+      })
+      return channels
+    } */
+    recommendChannels() {
+      // filter 把符合条件的元素返回到新数组
+      return this.allChannels.filter(channel => {
+        // find 找到符合条件的第一个就返回，后面就不再查找！
+        return !this.myChannels.find(myChannel => myChannel.id === channel.id)
+      })
     }
   },
 
