@@ -18,7 +18,7 @@
       <div class="label-info-warp">
         <span>{{ article.aut_name }}</span>
         <span>{{ article.comm_count }}评论</span>
-        <span>{{ article.pubdate }}</span>
+        <span>{{ article.pubdate | relativeTime }}</span>
       </div>
     </div>
     <!-- 右侧一张照片的情况 -->
