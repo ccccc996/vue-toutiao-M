@@ -2,21 +2,22 @@
   <div class="search-container">
     <form action="/">
       <van-search
-        v-model="value"
+        v-model="searchText"
         show-action
         background="#3296fa"
         placeholder="请输入搜索关键词"
         @search="onSearch"
         @cancel="onCancel"
+        @focus="isResultShow = false"
       />
     </form>
 
     <!-- 搜索结果 -->
-    <search-result />
+    <search-result v-if="isResultShow" />
     <!-- 联想建议 -->
-    <search-suggestion />
+    <search-suggestion v-else-if="searchText" />
     <!-- 搜索历史 -->
-    <search-history />
+    <search-history v-else />
   </div>
 </template>
 
@@ -30,7 +31,8 @@ export default {
 
   data() {
     return {
-      value: ''
+      searchText: '',
+      isResultShow: false // 控制搜索结果的展示
     }
   },
 
@@ -42,7 +44,8 @@ export default {
 
   methods: {
     onSearch(val) {
-      console.log(val)
+      // 展示搜索结果
+      this.isResultShow = true
     },
     onCancel() {
       this.$router.back()
