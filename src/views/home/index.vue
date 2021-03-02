@@ -89,9 +89,9 @@ export default {
         this.$toast('获取用户频道失败')
       }
     },
-    onUpdateActive(index) {
+    onUpdateActive(index, isChannelEditShow = true) {
       this.active = index
-      this.isChannelEditShow = false // 关闭弹出层
+      this.isChannelEditShow = isChannelEditShow // 关闭弹出层
     }
   }
 }
