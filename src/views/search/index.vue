@@ -10,10 +10,21 @@
         @cancel="onCancel"
       />
     </form>
+
+    <!-- 搜索结果 -->
+    <search-result />
+    <!-- 联想建议 -->
+    <search-suggestion />
+    <!-- 搜索历史 -->
+    <search-history />
   </div>
 </template>
 
 <script>
+import SearchHistory from './components/search-history'
+import SearchResult from './components/search-result'
+import SearchSuggestion from './components/search-suggestion'
+
 export default {
   name: 'searchIndex',
 
@@ -21,6 +32,12 @@ export default {
     return {
       value: ''
     }
+  },
+
+  components: {
+    SearchHistory,
+    SearchResult,
+    SearchSuggestion
   },
 
   methods: {
