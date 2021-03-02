@@ -1,18 +1,24 @@
 <template>
   <div class="search-suggestion">
-    <van-cell title="黑马程序员" icon="search"></van-cell>
-    <van-cell title="黑马程序员" icon="search"></van-cell>
-    <van-cell title="黑马程序员" icon="search"></van-cell>
-    <van-cell title="黑马程序员" icon="search"></van-cell>
+    <van-cell
+      icon="search"
+      :title="item"
+      v-for="(item, index) in suggestions"
+      :key="index"
+    ></van-cell>
   </div>
 </template>
 
 <script>
+import { getSearchSuggestions } from '@/api/search'
+
 export default {
   name: 'SearchSuggestion',
 
   data() {
-    return {}
+    return {
+      suggestions: [] // 联想建议数据列表
+    }
   },
 
   props: {
@@ -26,14 +32,23 @@ export default {
     searchText: {
       // 当 searchText 发生变化的时候会调用 handler 函数（固定的）
       handler(value) {
-        console.log(value)
+        this.loadSearchSuggestions(value)
       },
       // 第一次的时候也触发 handler
       immediate: true
     }
   },
 
-  methods: {}
+  methods: {
+    async loadSearchSuggestions(q) {
+      try {
+        const { data } = await getSearchSuggestions(q)
+        this.suggestions = data.data.options
+      } catch (err) {
+        this.$toast('数据获取失败，请稍后重试')
+      }
+    }
+  }
 }
 </script>
 
