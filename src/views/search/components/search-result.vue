@@ -36,7 +36,8 @@ export default {
       loading: false,
       finished: false,
       page: 1,
-      per_page: 20
+      per_page: 20,
+      error: false
     }
   },
 
