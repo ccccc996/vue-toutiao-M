@@ -21,7 +21,11 @@
       @search="onSearch"
     />
     <!-- 搜索历史 -->
-    <search-history v-else :search-histories="searchHistories" />
+    <search-history
+      v-else
+      :search-histories="searchHistories"
+      @search="onSearch"
+    />
   </div>
 </template>
 
