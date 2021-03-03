@@ -1,11 +1,8 @@
 <template>
   <div class="search-suggestion">
-    <van-cell
-      icon="search"
-      :title="item"
-      v-for="(item, index) in suggestions"
-      :key="index"
-    ></van-cell>
+    <van-cell icon="search" v-for="(item, index) in suggestions" :key="index">
+      <div slot="title" v-html="highlight(item)"></div>
+    </van-cell>
   </div>
 </template>
 
@@ -51,9 +48,20 @@ export default {
       } catch (err) {
         this.$toast('数据获取失败，请稍后重试')
       }
+    },
+    highlight(text) {
+      const reg = new RegExp(this.searchText, 'gi')
+      const highlightStr = `<span class="active">${this.searchText}</span>`
+      return text.replace(reg, highlightStr)
     }
   }
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.search-suggestion {
+  /deep/ span.active {
+    color: #3296fa;
+  }
+}
+</style>
