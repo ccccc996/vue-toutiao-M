@@ -6,6 +6,13 @@
 export default {
   name: 'articleIndex',
 
+  props: {
+    articleId: {
+      type: [Number, String],
+      required: true
+    }
+  },
+
   data() {
     return {}
   },
