@@ -36,7 +36,8 @@ export default {
   data() {
     return {
       searchText: '',
-      isResultShow: false // 控制搜索结果的展示
+      isResultShow: false, // 控制搜索结果的展示
+      searchHistories: []
     }
   },
 
@@ -49,6 +50,16 @@ export default {
   methods: {
     onSearch(val) {
       this.searchText = val
+
+      // 存储搜索历史记录
+      // 期望最新的放到最前面！
+      const index = this.searchHistories.indexOf(val)
+      if (index !== -1) {
+        this.searchHistories.splice(index, 1)
+      }
+      this.searchHistories.unshift(val)
+      // console.log(this.searchHistories)
+
       // 展示搜索结果
       this.isResultShow = true
     },
