@@ -18,6 +18,7 @@ export const getArticle = params => {
 export const getArticleById = articleId => {
   return request({
     method: 'GET',
-    url: `/app/v1_1/articles/${articleId}`
+    // 注意这里是 v1_0!!!
+    url: `/app/v1_0/articles/${articleId}`
   })
 }
