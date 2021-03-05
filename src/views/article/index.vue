@@ -51,6 +51,7 @@
         <div
           class="article-content  markdown-body"
           v-html="article.content"
+          ref="article-content"
         ></div>
         <van-divider>正文结束</van-divider>
       </div>
@@ -89,7 +90,9 @@
 
 <script>
 import { getArticleById } from '@/api/article'
-
+import { ImagePreview } from 'vant'
+// 测试 => http://localhost:8080/#/article/140911
+// 140006
 export default {
   name: 'articleIndex',
 
@@ -120,6 +123,9 @@ export default {
         // console.log(data)
         const { data } = await getArticleById(this.articleId.toString())
         this.article = data.data
+        setTimeout(() => {
+          this.previewImage()
+        }, 0)
         console.log(data)
       } catch (err) {
         if (err.response && err.response.status === 404) {
@@ -129,6 +135,20 @@ export default {
       }
       // 关闭 loading 状态
       this.loading = false
+    },
+    previewImage() {
+      const articleContent = this.$refs['article-content']
+      const imgs = articleContent.querySelectorAll('img')
+      const images = []
+      imgs.forEach((img, index) => {
+        images.push(img.src)
+        img.onclick = function() {
+          ImagePreview({
+            images,
+            startPosition: index
+          })
+        }
+      })
     }
   }
 }
