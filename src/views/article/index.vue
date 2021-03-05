@@ -72,7 +72,12 @@
             v-model="article.is_collected"
             :article-id="article.art_id"
           ></collect-article>
-          <van-icon color="#777" name="good-job-o" />
+          <!-- <van-icon color="#777" name="good-job-o" /> -->
+          <like-article
+            class="btn-item"
+            v-model="article.attitude"
+            :article-id="article.art_id"
+          ></like-article>
           <van-icon name="share" color="#777777"></van-icon>
         </div>
         <!-- /底部区域 -->
@@ -103,6 +108,7 @@ import { ImagePreview } from 'vant'
 // import { addFollow, deleteFollow } from '@/api/user'
 import followUser from '@/components/follow-user'
 import CollectArticle from '@/components/collect-article'
+import LikeArticle from '@/components/like-article'
 // 测试 => http://localhost:8080/#/article/140911
 // 140006
 export default {
@@ -126,7 +132,8 @@ export default {
 
   components: {
     followUser,
-    CollectArticle
+    CollectArticle,
+    LikeArticle
   },
 
   created() {
