@@ -84,7 +84,8 @@
       >
       <!-- 这里在 info 替换成 badge -->
       <van-icon name="comment-o" badge="123" color="#777" />
-      <van-icon color="#777" name="star-o" />
+      <!-- <van-icon color="#777" name="star-o" /> -->
+      <collect-article></collect-article>
       <van-icon color="#777" name="good-job-o" />
       <van-icon name="share" color="#777777"></van-icon>
     </div>
@@ -97,6 +98,7 @@ import { getArticleById } from '@/api/article'
 import { ImagePreview } from 'vant'
 // import { addFollow, deleteFollow } from '@/api/user'
 import followUser from '@/components/follow-user'
+import CollectArticle from '@/components/collect-article'
 // 测试 => http://localhost:8080/#/article/140911
 // 140006
 export default {
@@ -119,7 +121,8 @@ export default {
   },
 
   components: {
-    followUser
+    followUser,
+    CollectArticle
   },
 
   created() {
@@ -228,7 +231,7 @@ export default {
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    .van-icon {
+    /deep/ .van-icon {
       font-size: 122px;
       color: #b4b4b4;
     }
