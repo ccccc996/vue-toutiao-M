@@ -83,6 +83,8 @@
 </template>
 
 <script>
+import { getArticleById } from '@/api/article'
+
 export default {
   name: 'articleIndex',
 
@@ -97,7 +99,20 @@ export default {
     return {}
   },
 
-  methods: {}
+  created() {
+    this.loadArticle()
+  },
+
+  methods: {
+    async loadArticle() {
+      try {
+        const { data } = await getArticleById(this.articleId)
+        console.log(data)
+      } catch (err) {
+        console.log('获取数据失败', err)
+      }
+    }
+  }
 }
 </script>
 
