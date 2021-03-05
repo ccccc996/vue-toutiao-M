@@ -48,7 +48,10 @@
         <!-- /用户信息 -->
 
         <!-- 文章内容 -->
-        <div class="article-content" v-html="article.content"></div>
+        <div
+          class="article-content  markdown-body"
+          v-html="article.content"
+        ></div>
         <van-divider>正文结束</van-divider>
       </div>
       <!-- /加载完成-文章详情 -->
@@ -132,6 +135,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './github-markdown.css';
 .article-container {
   .main-wrap {
     position: fixed;
