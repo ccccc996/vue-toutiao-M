@@ -32,11 +32,21 @@
           </div>
 
           <!-- 用户关注按钮组件 -->
-          <follow-user
+          <!-- class 会直接作用于组件的根节点上 -->
+          <!-- <follow-user
             class="follow-btn"
             :is-followed="article.is_followed"
             :user-id="article.aut_id"
             @update-is_followed="article.is_followed = $event"
+          /> -->
+          <!-- 当传递给子组件的数据，既要使用也要修改 -->
+          <!-- value="article.is_followed" -->
+          <!-- @input="article.is_followed=$event" -->
+          <!-- 可以通过子组件的model属性自定义value和input 事件 -->
+          <follow-user
+            class="follow-btn"
+            v-model="article.is_followed"
+            :user-id="article.aut_id"
           />
         </van-cell>
         <!-- /用户信息 -->

@@ -31,6 +31,11 @@ export default {
     }
   },
 
+  model: {
+    prop: 'isFollowed', // 默认是 value
+    event: 'update-is_followed' // ，默认是 input
+  },
+
   props: {
     isFollowed: {
       type: Boolean,
