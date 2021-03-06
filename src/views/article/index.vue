@@ -69,6 +69,7 @@
           :source="article.art_id"
           :list="commentList"
           @onload-success="totalCommentCount = $event.total_count"
+          @reply-click="onReplyClick"
         />
         <!-- 底部区域 -->
         <div class="article-bottom">
@@ -124,7 +125,10 @@
     </div>
 
     <!-- 评论回复 -->
-    <van-popup v-model="isReplyShow" position="bottom" :style="{ height: '100%' }"
+    <van-popup
+      v-model="isReplyShow"
+      position="bottom"
+      :style="{ height: '100%' }"
       >hello</van-popup
     >
   </div>
@@ -220,6 +224,10 @@ export default {
       this.isPostShow = false
       // 将发布内容展示到页面顶部
       this.commentList.unshift(data.new_obj)
+    },
+    onReplyClick(comment) {
+      console.log(comment)
+      this.isReplyShow = true
     }
   }
 }
