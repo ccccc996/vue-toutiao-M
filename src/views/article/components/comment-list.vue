@@ -1,4 +1,5 @@
 <template>
+  <!-- 只有 List 在可视范围内，才会检查滚动位置触发 onLoad -->
   <van-list
     v-model="loading"
     :finished="finished"
@@ -62,6 +63,8 @@ export default {
 
   created() {
     // 一上来就加载一次，为了显示评论总数
+    // 当你手动初始 onLoad 的话，它不会自动开始初始的 loading，所以我们要手动的开启初始 loading
+    this.loading = true
     this.onLoad()
   },
 
