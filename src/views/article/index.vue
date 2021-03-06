@@ -93,7 +93,7 @@
         <!-- /底部区域 -->
         <!-- 发布评论的弹层 -->
         <van-popup v-model="isPostShow" position="bottom">
-          hello
+          <comment-post></comment-post>
         </van-popup>
       </div>
       <!-- /加载完成-文章详情 -->
@@ -124,6 +124,7 @@ import followUser from '@/components/follow-user'
 import CollectArticle from '@/components/collect-article'
 import LikeArticle from '@/components/like-article'
 import CommentList from './components/comment-list'
+import CommentPost from './components/comment-post'
 // 测试 => http://localhost:8080/#/article/140911
 // 140006
 export default {
@@ -151,7 +152,8 @@ export default {
     followUser,
     CollectArticle,
     LikeArticle,
-    CommentList
+    CommentList,
+    CommentPost
   },
 
   created() {
