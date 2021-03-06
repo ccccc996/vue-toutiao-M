@@ -38,6 +38,11 @@ export default {
     }
   },
 
+  created() {
+    // 一上来就加载一次，为了显示评论总数
+    this.onLoad()
+  },
+
   methods: {
     async onLoad() {
       try {
@@ -48,10 +53,13 @@ export default {
           offset: this.offset,
           limit: this.limit // 获取的个数
         })
-
+        console.log(data.data)
         // 2. 将数据添加到列表中
         const { results } = data.data
         this.list.push(...results)
+
+        // 把总数量传递到父级
+        this.$emit('onload-success', data.data)
         // 3. 将 loading 设置为 false
         this.loading = false
 
