@@ -1,7 +1,12 @@
 <template>
   <div class="article-container">
     <!-- 导航栏 -->
-    <van-nav-bar class="page-nav-bar" left-arrow title="黑马头条"></van-nav-bar>
+    <van-nav-bar
+      class="page-nav-bar"
+      left-arrow
+      title="黑马头条"
+      @click-left="$router.back()"
+    ></van-nav-bar>
     <!-- /导航栏 -->
 
     <div class="main-wrap">
@@ -62,6 +67,7 @@
         <!-- 文章评论列表 -->
         <comment-list
           :source="article.art_id"
+          :list="commentList"
           @onload-success="totalCommentCount = $event.total_count"
         />
         <!-- 底部区域 -->
@@ -93,7 +99,7 @@
         <!-- /底部区域 -->
         <!-- 发布评论的弹层 -->
         <van-popup v-model="isPostShow" position="bottom">
-          <comment-post :target="article.art_id"></comment-post>
+          <comment-post :target="article.art_id" @post-success="onPostSuccess"></comment-post>
         </van-popup>
       </div>
       <!-- /加载完成-文章详情 -->
@@ -144,7 +150,8 @@ export default {
       errStatus: 0, // 失败的状态码
       followLoading: false, // 关注按钮的 loading 状态
       totalCommentCount: 0,
-      isPostShow: false
+      isPostShow: false, // 控制评论弹层显示/隐藏
+      commentList: [] // 评论列表
     }
   },
 
@@ -198,6 +205,12 @@ export default {
           })
         }
       })
+    },
+    onPostSuccess(data) {
+      // 关闭弹出层
+      this.isPostShow = false
+      // 将发布内容展示到页面顶部
+      this.commentList.unshift(data.new_obj)
     }
   }
 }

@@ -41,7 +41,11 @@ export default {
           content: this.message, // 评论内容
           art_id: null
         })
-
+        // 关闭弹出层
+        // 清空数据
+        // 将评论的内容添加到list列表中
+        this.message = ''
+        this.$emit('post-success', data.data)
         console.log(data)
       } catch (err) {
         this.$toast.fail('发布失败')
