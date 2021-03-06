@@ -7,16 +7,22 @@
     :error.sync="error"
     error-text="加载失败，请点击重试"
   >
-    <van-cell
+    <!-- <van-cell
       v-for="(item, index) in list"
       :key="index"
       :title="item.content"
+    /> -->
+    <comment-item
+      v-for="(item, index) in list"
+      :key="index"
+      :comment="item"
     />
   </van-list>
 </template>
 
 <script>
 import { getComments } from '@/api/comment'
+import CommentItem from './comment-item'
 export default {
   name: 'CommentList',
 
@@ -25,6 +31,10 @@ export default {
       type: [Number, String, Object],
       required: true
     }
+  },
+
+  components: {
+    CommentItem
   },
 
   data() {
