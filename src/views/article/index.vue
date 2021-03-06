@@ -156,6 +156,10 @@ export default {
         // console.log(data)
         const { data } = await getArticleById(this.articleId.toString())
         this.article = data.data
+        // 后端返回的可能是 null
+        if (data.data.attitude === null) {
+          data.data.attitude = -1
+        }
         setTimeout(() => {
           this.previewImage()
         }, 0)
