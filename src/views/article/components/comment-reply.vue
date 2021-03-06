@@ -1,10 +1,16 @@
 <template>
   <div class="comment-reply">
-    回复评论
+    <van-nav-bar title="xx条回复">
+      <van-icon slot="left" name="cross" @click="$emit('close')" />
+    </van-nav-bar>
+    <!-- 当前评论项 -->
+    <comment-item :comment="comment" />
   </div>
 </template>
 
 <script>
+import commentItem from './comment-item'
+
 export default {
   name: 'CommentReply',
 
@@ -13,6 +19,10 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  components: {
+    commentItem
   },
 
   data() {

@@ -130,7 +130,7 @@
       position="bottom"
       :style="{ height: '100%' }"
     >
-      <comment-reply :comment="currentComment" />
+      <comment-reply :comment="currentComment" @close="isReplyShow = false" />
     </van-popup>
   </div>
 </template>
