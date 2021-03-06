@@ -59,6 +59,8 @@
         ></div>
         <van-divider>正文结束</van-divider>
 
+        <!-- 文章评论列表 -->
+        <comment-list />
         <!-- 底部区域 -->
         <div class="article-bottom">
           <van-button class="comment-btn" type="default" round size="small"
@@ -109,6 +111,7 @@ import { ImagePreview } from 'vant'
 import followUser from '@/components/follow-user'
 import CollectArticle from '@/components/collect-article'
 import LikeArticle from '@/components/like-article'
+import CommentList from './components/comment-list'
 // 测试 => http://localhost:8080/#/article/140911
 // 140006
 export default {
@@ -133,7 +136,8 @@ export default {
   components: {
     followUser,
     CollectArticle,
-    LikeArticle
+    LikeArticle,
+    CommentList
   },
 
   created() {
