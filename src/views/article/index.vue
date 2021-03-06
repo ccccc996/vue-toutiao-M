@@ -130,7 +130,12 @@
       position="bottom"
       :style="{ height: '100%' }"
     >
-      <comment-reply :comment="currentComment" @close="isReplyShow = false" />
+      <!-- 弹出层是懒渲染的：只有在第一次展示的时候才会渲染里面的内容，之后它的关闭和显示都是在切换内容的显示和隐藏 -->
+      <comment-reply
+        v-if="isReplyShow"
+        :comment="currentComment"
+        @close="isReplyShow = false"
+      />
     </van-popup>
   </div>
 </template>
