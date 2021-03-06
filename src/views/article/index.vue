@@ -129,7 +129,9 @@
       v-model="isReplyShow"
       position="bottom"
       :style="{ height: '100%' }"
-      >hello</van-popup
+      >
+        <comment-reply></comment-reply>
+      </van-popup
     >
   </div>
 </template>
@@ -143,6 +145,7 @@ import CollectArticle from '@/components/collect-article'
 import LikeArticle from '@/components/like-article'
 import CommentList from './components/comment-list'
 import CommentPost from './components/comment-post'
+import CommentReply from './components/comment-reply'
 // 测试 => http://localhost:8080/#/article/140911
 // 140006
 export default {
@@ -173,7 +176,8 @@ export default {
     CollectArticle,
     LikeArticle,
     CommentList,
-    CommentPost
+    CommentPost,
+    CommentReply
   },
 
   created() {
