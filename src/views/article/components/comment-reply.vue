@@ -8,15 +8,19 @@
 export default {
   name: 'CommentReply',
 
-  data () {
-    return {
+  props: {
+    comment: {
+      type: Object,
+      required: true
     }
+  },
+
+  data() {
+    return {}
   },
 
   methods: {}
 }
 </script>
 
-<style lang='less' scoped>
-
-</style>
+<style lang="less" scoped></style>
