@@ -53,7 +53,11 @@
     <!-- /修改性别 -->
     <!-- 修改生日 -->
     <van-popup v-model="isUpdateBirthdayShow" position="bottom">
-      <update-birthday />
+      <update-birthday
+        v-if="isUpdateBirthdayShow"
+        v-model="user.birthday"
+        @close="isUpdateBirthdayShow = false"
+      />
     </van-popup>
     <!-- /修改生日 -->
   </div>
