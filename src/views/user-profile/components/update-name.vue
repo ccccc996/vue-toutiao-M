@@ -5,6 +5,7 @@
       left-text="取消"
       right-text="完成"
       @click-left="$emit('close')"
+      @click-right="onConfirm"
     />
     <div class="update-warp">
       <van-field
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import { updateUserProfile } from '@/api/user'
+
 export default {
   name: 'UpdateName',
 
@@ -37,7 +40,36 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {
+    async onConfirm() {
+      this.$toast.loading({
+        message: '保存中...',
+        forbidClick: true, // 禁止背景点击
+        duration: 0 // 持续展示
+      })
+
+      try {
+        const localName = this.localName
+
+        if (!localName.length) {
+          this.$$toast('昵称不能为空')
+          return
+        }
+
+        await updateUserProfile({
+          name: localName
+        })
+
+        // 更新视图
+        this.$emit('input', localName)
+
+        // 关闭弹窗
+        this.$emit('close')
+      } catch (err) {
+        this.$toast.fail('更新失败')
+      }
+    }
+  }
 }
 </script>
 
