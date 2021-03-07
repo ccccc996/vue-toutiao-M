@@ -24,13 +24,15 @@
       v-model="isUpdateNameShow"
       position="bottom"
       :style="{ height: '100%' }"
-      >hello</van-popup
     >
+      <update-name />
+    </van-popup>
   </div>
 </template>
 
 <script>
 import { getUserProfile } from '@/api/user'
+import UpdateName from './components/update-name'
 
 export default {
   name: 'UserProfile',
@@ -40,6 +42,10 @@ export default {
       user: {}, // 个人信息
       isUpdateNameShow: false
     }
+  },
+
+  components: {
+    UpdateName
   },
 
   created() {
