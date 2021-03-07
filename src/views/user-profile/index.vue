@@ -25,7 +25,7 @@
       position="bottom"
       :style="{ height: '100%' }"
     >
-      <update-name />
+      <update-name @close="isUpdateNameShow = false" />
     </van-popup>
   </div>
 </template>
