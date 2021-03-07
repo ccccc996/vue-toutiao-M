@@ -16,15 +16,25 @@
 
       <!-- 回复评论 -->
       <div class="post-wrap">
-        <van-button class="post-btn" size="small" round>写评论</van-button>
+        <van-button
+          class="post-btn"
+          size="small"
+          round
+          @click="isPostShow = true"
+          >写评论</van-button
+        >
       </div>
     </div>
+    <van-popup v-model="isPostShow" position="bottom">
+      <comment-post :target="comment.com_id" />
+    </van-popup>
   </div>
 </template>
 
 <script>
 import commentItem from './comment-item'
 import commentList from './comment-list'
+import commentPost from './comment-post'
 
 export default {
   name: 'CommentReply',
@@ -38,11 +48,14 @@ export default {
 
   components: {
     commentItem,
-    commentList
+    commentList,
+    commentPost
   },
 
   data() {
-    return {}
+    return {
+      isPostShow: false
+    }
   },
 
   methods: {}

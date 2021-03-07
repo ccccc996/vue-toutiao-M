@@ -28,6 +28,13 @@ export default {
     }
   },
 
+  inject: {
+    articleId: {
+      type: [Number, String, Object],
+      default: null
+    }
+  },
+
   props: {
     target: {
       type: [Number, String, Object],
@@ -45,9 +52,9 @@ export default {
       })
       try {
         const { data } = await addComment({
-          target: this.target, // 评论的目标 ID（评论文章即为文章ID，对评论进行回复则为评论ID）
+          target: this.target.toString(), // 评论的目标 ID（评论文章即为文章ID，对评论进行回复则为评论ID）
           content: this.message, // 评论内容
-          art_id: null
+          art_id: this.articleId.toString() === this.target.toString() ? null : this.articleId.toString()
         })
         // 关闭弹出层
         // 清空数据
