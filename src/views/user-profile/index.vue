@@ -7,8 +7,9 @@
       left-arrow
       @click-left="$router.back()"
     />
+    <input type="file" ref="file" hidden @change="onFileChange" />
     <!-- 单元格 -->
-    <van-cell title="头像" value="内容" is-link>
+    <van-cell title="头像" value="内容" is-link @click="$refs.file.click()">
       <van-image class="avatar" fit="cover" round :src="user.photo" />
     </van-cell>
     <van-cell
@@ -77,7 +78,8 @@ export default {
       user: {}, // 个人信息
       isUpdateNameShow: false,
       isUpdateGenderShow: false,
-      isUpdateBirthdayShow: false
+      isUpdateBirthdayShow: false,
+      img: null // 预览的图片
     }
   },
 
@@ -99,6 +101,14 @@ export default {
       } catch (err) {
         this.$toast('数据获取失败')
       }
+    },
+    onFileChange() {
+      // 获取文件对象
+      const file = this.$refs.file.files[0]
+      console.log(file)
+      // 基于文章对象获取 blob 数据
+      this.img = window.URL.createObjectURL(file)
+      console.log(this.img)
     }
   }
 }
