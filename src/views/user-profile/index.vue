@@ -61,6 +61,15 @@
       />
     </van-popup>
     <!-- /修改生日 -->
+    <!-- 编辑头像 -->
+    <van-popup
+      v-model="isUpdatePhotoShow"
+      position="bottom"
+      style="height:100%"
+    >
+      <update-photo :img="img" />
+    </van-popup>
+    <!-- /编辑头像 -->
   </div>
 </template>
 
@@ -69,6 +78,7 @@ import { getUserProfile } from '@/api/user'
 import UpdateName from './components/update-name'
 import UpdateGender from './components/update-gender'
 import UpdateBirthday from './components/update-birthday'
+import UpdatePhoto from './components/update-photo'
 
 export default {
   name: 'UserProfile',
@@ -79,14 +89,16 @@ export default {
       isUpdateNameShow: false,
       isUpdateGenderShow: false,
       isUpdateBirthdayShow: false,
-      img: null // 预览的图片
+      img: null, // 预览的图片
+      isUpdatePhotoShow: false
     }
   },
 
   components: {
     UpdateName,
     UpdateGender,
-    UpdateBirthday
+    UpdateBirthday,
+    UpdatePhoto
   },
 
   created() {
@@ -109,6 +121,13 @@ export default {
       // 基于文章对象获取 blob 数据
       this.img = window.URL.createObjectURL(file)
       console.log(this.img)
+
+      // 展示预览图片弹出层
+      this.isUpdatePhotoShow = true
+
+      // file-input 如果选了同一个文件不会触发 change 事件
+      // 解决办法就是每次使用完毕，把它的 value 清空
+      this.$refs.file.value = ''
     }
   }
 }
