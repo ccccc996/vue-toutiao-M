@@ -71,6 +71,7 @@
         v-if="isUpdatePhotoShow"
         :img="img"
         @close="isUpdatePhotoShow = false"
+        @update-photo="user.photo = $event"
       />
     </van-popup>
     <!-- /编辑头像 -->
