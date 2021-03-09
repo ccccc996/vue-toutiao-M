@@ -42,7 +42,7 @@ request.interceptors.request.use(
 )
 
 // replace 和 push 的差异，replace 不会形成历史记录，登录页一般也不希望形成历史记录
-const login = () => {
+export const login = () => {
   router.replace({
     name: 'login',
     query: {
