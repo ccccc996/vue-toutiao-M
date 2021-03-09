@@ -1,7 +1,9 @@
 <template>
   <div class="layout-container">
     <!-- 子路由 -->
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <!-- 标签导航栏 -->
     <van-tabbar class="layout-tabbar" v-model="active" route>
       <van-tabbar-item to="/">
@@ -35,6 +37,9 @@ export default {
     return {
       active: 0
     }
+  },
+  mounted() {
+    this.$store.commit('addCacheComponents', 'LayoutIndex')
   },
 
   methods: {}

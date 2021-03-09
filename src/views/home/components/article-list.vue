@@ -1,5 +1,5 @@
 <template>
-  <div class="article-list">
+  <div class="article-list" ref="articleListRef">
     <van-pull-refresh
       v-model="isRefreshLoading"
       @refresh="onRefresh"
@@ -55,8 +55,19 @@ export default {
       timestamp: null, // 请求下一页数据的时间戳
       error: false, // 是否加载失败
       isRefreshLoading: false, // 控制下拉刷新的 loading 状态
-      refreshSuccessText: '刷新成功'
+      refreshSuccessText: '刷新成功',
+      scrollTop: 0
     }
+  },
+
+  mounted() {
+    const aDom = this.$refs.articleListRef
+    aDom.onscroll = () => {
+      this.scrollTop = aDom.scrollTop
+    }
+  },
+  activated() {
+    this.$refs.articleListRef.scrollTop = this.scrollTop
   },
 
   methods: {

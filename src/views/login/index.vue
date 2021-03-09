@@ -109,7 +109,7 @@ export default {
         // console.log(res, '登陆成功')
         this.$store.commit('setUser', data.data)
         this.$toast.success('登录成功')
-
+        this.$store.commit('rmCacheComponents', 'LayoutIndex')
         this.$router.push(this.$route.query.redirect || '/')
       } catch (err) {
         if (err.response.status === 400) {
